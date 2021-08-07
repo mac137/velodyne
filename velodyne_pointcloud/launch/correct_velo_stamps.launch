@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<launch>
+
+    <arg name="lidar_topic2sub" default="velodyne_points" doc="Topic to subscribe origianl velodyne points"/>
+    <arg name="lidar_topic2publish" default="pp/velodyne_points_4_sync" doc="Topic to publish velo points with corrected timestamps"/>
+
+    <node pkg="pp_lidar2cam_projector" name="velodyne_timestamp_corrector" type="velodyne_timestamp_corrector.py" output="screen">
+        <!-- <rosparam file="$(find pp_lidar2cam_projector)/config/params.yaml" command="load"/> -->
+        <param name="lidar_topic2sub" value="$(arg lidar_topic2sub)"/>
+        <param name="lidar_topic2publish" value="$(arg lidar_topic2publish)"/>
+        <param name="debug" value="$(arg camera_id)"/>
+    </node>
+
+</launch>
