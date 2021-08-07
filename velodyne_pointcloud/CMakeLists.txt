@@ -42,6 +42,8 @@ find_library(YAML_CPP_LIBRARY
 
 link_directories(${YAML_CPP_LIBRARY_DIRS})
 
+catkin_python_setup()
+
 generate_dynamic_reconfigure_options(
   cfg/TransformNode.cfg
 )
@@ -68,6 +70,8 @@ catkin_package(
 add_subdirectory(src/lib)
 add_subdirectory(src/conversions)
 
+
+
 install(DIRECTORY include/${PROJECT_NAME}/
         DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION})
 install(FILES nodelets.xml
@@ -78,8 +82,13 @@ install(DIRECTORY params/
         DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/params)
 install(PROGRAMS 
 	scripts/gen_calibration.py
-	scripts/velodyne_timestamp_corrector.py
         DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+        
+
+catkin_install_python(PROGRAMS
+	scripts/velodyne_timestamp_corrector.py
+        DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+        )
 
 roslint_cpp()
 
