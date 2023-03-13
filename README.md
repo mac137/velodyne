@@ -1,3 +1,10 @@
+# This fork
+
+In the original repo, `velodyne_pointcloud` is always timestamped according to either the beginning or the end of the revolution of Velodyne lidars. This fork changes this behaviour in such a way that these timestmaps are always synced with the points in front of the sensor. If you would like to project lidar points onto a camera space that is also facing the front, then this repo can help to reduce the discrepancy of the projection when your senors are moving.
+
+
+---
+
 [![](https://github.com/ros-drivers/velodyne/workflows/Basic%20Build%20Workflow/badge.svg)](https://github.com/ros-drivers/velodyne/actions)
 
 Overview
