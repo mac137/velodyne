@@ -16,7 +16,7 @@ def lidar_points2numpy(lidar_points):
     numpy_array = np.array([[0], [9999], [9999], [9999], [9999]], dtype=np.float16)
     counter = 0
     for point in pc2.read_points(lidar_points, field_names=("x", "y", "z", "time"), skip_nans=True):
-        if point[0] > 1.2:
+        if point[0] > 1.1:
             # take only every 20 point (anyway we cal only average so it is very reasonable)
             if counter == 20:
                 numpy_array = np.append(numpy_array, np.array([[point[0]], [point[1]], [point[2]], [1.0], [point[3]]], dtype=np.float16), axis=1)
@@ -52,7 +52,7 @@ class LidarProjector:
 
         average_time_diff_from_numpy = 0.0
 
-        # these points are of numpy array and their x-coordinate > 1.2 already!
+        # these points are of numpy array and their x-coordinate > 1.1 already!
         points = lidar_points2numpy(velo_orig_msg)
 
         number_of_points = points.shape[1]
@@ -138,7 +138,7 @@ class LidarProjector:
 
 
 def main(args):
-    rospy.init_node('Velodyne_timestamp_corrector_node', anonymous=True)
+    rospy.init_node('Velodyne_timestamp_corrector_node', anonymous=False)
 
     lidar_topic2sub = str(rospy.get_param("/velodyne_timestamp_corrector/lidar_topic2sub"))
     lidar_topic2publish = str(rospy.get_param("/velodyne_timestamp_corrector/lidar_topic2publish"))
